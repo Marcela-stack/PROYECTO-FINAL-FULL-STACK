@@ -1,36 +1,19 @@
-// Archivo JavaScript para interactividad
+// Selecciona todos los enlaces que tengan un atributo href que comience con #
+const links = document.querySelectorAll('a[href^="#"]');
 
-document.addEventListener("DOMContentLoaded", () => {
-    // Smooth scrolling
-    const links = document.querySelectorAll("nav ul li a");
-    links.forEach(link => {
-        link.addEventListener("click", event => {
-            event.preventDefault();
-            const targetId = event.target.getAttribute("href").slice(1);
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                targetSection.scrollIntoView({ behavior: "smooth" });
-            }
-        });
-    });
+// Agrega un evento de clic a cada enlace
+links.forEach((link) => {
+  link.addEventListener('click', (e) => {
+    // Evita que el enlace se comporte de manera normal
+    e.preventDefault();
 
-    // Funcionalidad de botones de usuario
-    const loginButton = document.querySelector(".user-options button:nth-child(1)");
-    const registerButton = document.querySelector(".user-options button:nth-child(2)");
+    // Obtiene el ID del elemento al que se debe desplazar
+    const id = link.getAttribute('href');
 
-    loginButton.addEventListener("click", () => {
-        alert("Iniciar sesión aún no está implementado.");
-    });
+    // Selecciona el elemento al que se debe desplazar
+    const element = document.querySelector(id);
 
-    registerButton.addEventListener("click", () => {
-        alert("Registro aún no está implementado.");
-    });
-
-    // Efecto al hacer clic en las tarjetas
-    const cards = document.querySelectorAll(".brand, .novelty");
-    cards.forEach(card => {
-        card.addEventListener("click", () => {
-            alert(`Has seleccionado: ${card.textContent.trim()}`);
-        });
-    });
+    // Desplaza suavemente hasta el elemento
+    element.scrollIntoView({ behavior: 'smooth' });
+  });
 });
